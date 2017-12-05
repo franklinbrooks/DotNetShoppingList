@@ -25,6 +25,8 @@ namespace ShoppingList.Models
         {
         }
 
+        public DbSet<ListItem> ListItems { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

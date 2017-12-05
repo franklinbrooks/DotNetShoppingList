@@ -1,0 +1,30 @@
+﻿@model ShoppingList.Models.ListItem
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="tableDiv"></div>
+<div id="listItemCreateForm">
+    @using (Ajax.BeginForm("AJAXCreate", "ListItems", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = "tableDiv",
+    }))
+    {
+        <div class="form-group">
+            @Html.AntiForgeryToken()
+            <div id="clearMe">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Custom_Scripts/BuildTable.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
